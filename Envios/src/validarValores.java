@@ -1,6 +1,4 @@
 import java.util.Scanner;
-
-
 public class validarValores {
     public static double validarrangodouble(Scanner sc, String msg, double min, double max) {
         double valor;
@@ -40,5 +38,4 @@ public class validarValores {
         }
         return sc.hasNextBoolean();
     }
-
 }
