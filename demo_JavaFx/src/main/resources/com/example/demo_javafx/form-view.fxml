@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<VBox spacing="12" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.demo_javafx.controllers.FormController"
+      prefHeight="400.0" prefWidth="600.0">
+    <padding>
+        <Insets left="12" right="12" top="12" bottom="12"/>
+    </padding>
+    <Label text="nombre :"/>
+    <TextField fx:id="txtNombre" promptText="Ingresa tu nombre completo"/>
+    <Label text="correo :"/>
+    <TextField fx:id="txtCorreo" promptText="Ingresa tu correo "/>
+    <Label text="Edad :"/>
+    <TextField fx:id="txtEdad" promptText="Ingresa tu Edad"/>
+    <Button text="Validar campos " onAction="#onValidate"/>
+    <Label fx:id="lblResulatado"/>
+</VBox>
