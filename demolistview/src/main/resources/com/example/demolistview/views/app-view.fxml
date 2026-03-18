@@ -32,6 +32,8 @@
             <children>
                 <Button mnemonicParsing="false" onAction="#loadFromFile" text="Recargar" />
                 <Button mnemonicParsing="false" onAction="#onAddPerson" text="Agregar" />
+                <Button mnemonicParsing="false" onAction="#onUpdate" text="Actualizar" />
+                <Button mnemonicParsing="false" onAction="#onRemove" text="Eliminar" />
             </children>
         </HBox>
 

@@ -13,6 +13,7 @@ public class PersonFileRepository {
     private final Path filePath = Paths.get("data", "persons.csv");
 
     private void ensureFileExist() throws IOException {
+        // agregar validacion para crear
         if (Files.notExists(filePath)) {
             Files.createFile(filePath);
         }
@@ -29,7 +30,9 @@ public class PersonFileRepository {
              StandardOpenOption.APPEND);
 
     }
+    public void saveFile(List<String> lines) throws IOException{
+        Files.write(filePath,lines,StandardCharsets.UTF_8,StandardOpenOption.TRUNCATE_EXISTING);
 
-
+    }
 
 }

@@ -1,10 +1,19 @@
 package com.example.demolistview.services;
 
-import com.example.demolistview.repositories.PersonFileRepository;
+// personon se encarga en comunicacarse con el archivo de persistencia
+// negocios lo que debe de hacer tu aplicacion las reglas
 
+
+import com.example.demolistview.repositories.PersonFileRepository;
+import javafx.fxml.FXML;
+import org.w3c.dom.ls.LSInput;
+
+import javax.xml.validation.Validator;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 public class PersonService {
 
@@ -22,19 +31,46 @@ public class PersonService {
                 String name = parts[0].trim();
                 String correo = parts[1].trim();
                 String edad = parts[2].trim();
-                result.add(name + " - " + correo + " (" + edad + " años)");
+                result.add(name + " - " + correo + "-" + edad );
             }
         }
 
         return result;
     }
 
-    public void addPerson(String name, String email, int edad) throws IOException {
+    public void updatePerson(int index,String name, String email, int edad) throws IOException {
+
+validatePerson(name, email, edad);
+        List<String > listaOriginal=repo.readAllLines();
+        List<String>cleanLines = new ArrayList<>();
+        for (String line : listaOriginal){
+            if(line != null && !line.isBlank()){
+                cleanLines.add(line); // esta linea esta buena, ya que no es null.
+            }
+        }
+        cleanLines.set(index,name+","+email+","+edad+",");
+        repo.saveFile(cleanLines);
+    }
+
+    public void addPerson(String name, String email, int  edad) throws IOException {
         validatePerson(name, email, edad);
         String nameNoComa = name.replace(",", "");
         String emailNoComa = email.replace(",", "");
 
         repo.appendNewLine(nameNoComa + "," + emailNoComa + "," + edad);
+
+    }
+
+    public void removePerson(int index) throws IOException{
+        List<String > listaOriginal=repo.readAllLines();
+        List<String> clearLines=new ArrayList<>();
+        for(String line : listaOriginal){
+            if (line!=null && !line.isBlank()){
+                clearLines.add(line);
+            }
+        }
+        clearLines.remove(index);
+        repo.saveFile(clearLines);
     }
 
     private void validatePerson(String name, String email, int edad) {

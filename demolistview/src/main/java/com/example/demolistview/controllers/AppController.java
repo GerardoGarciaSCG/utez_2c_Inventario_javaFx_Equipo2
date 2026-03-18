@@ -33,9 +33,16 @@ public class AppController {
 
     @FXML
     public void initialize() {
-        if (listView != null) {
-            listView.setItems(data);
-        }
+        listView.setItems(data);
+        listView.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldValue, newValue) -> {
+                    String[] parts = newValue.split("-");
+                    txtName.setText(parts[0]);
+                    txtEmail.setText(parts[1]);
+                    txtEdad.setText(parts[2]);
+
+                }
+        );
         loadFromFile();
     }
 
@@ -70,6 +77,50 @@ public class AppController {
             lblMsg.setStyle("-fx-text-fill: red");
         }
     }
+
+    @FXML
+    public void onUpdate() {
+        try {
+            int index = listView.getSelectionModel().getSelectedIndex();
+            String name = txtName.getText();
+            String email = txtEmail.getText();
+            String edad = txtEdad.getText();
+            int a = Integer.parseInt(edad);
+            service.updatePerson(index, name, email, a);
+            loadFromFile();
+            txtName.clear();
+            txtEmail.clear();
+            txtEdad.clear();
+            lblMsg.setText("Se actualizo el registro correctamente");
+        } catch (IllegalArgumentException e ){
+            lblMsg.setText("Hubo un erro con los datos "+e.getMessage());
+
+
+        } catch (Exception e) {
+            lblMsg.setText("Hubo error con el archivo");
+        }
+    }
+
+    public void onRemove(){
+        int index = listView.getSelectionModel().getSelectedIndex();
+
+        try {
+            service.removePerson(index);
+            txtName.clear();
+            txtEmail.clear();
+            txtEdad.clear();
+
+            loadFromFile();
+            lblMsg.setText("Persona eliminada");
+
+        }catch (NumberFormatException e){
+            lblMsg.setText("La edad tiene que ser un numero");
+        }catch (IOException | IllegalArgumentException e ){
+            lblMsg.setText("Error0" + e.getMessage());
+        }
+    }
+
+
 
     @FXML
     private void loadFromFile() {
