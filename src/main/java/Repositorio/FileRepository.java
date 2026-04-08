@@ -42,9 +42,6 @@ public class FileRepository {
                     double precio = Double.parseDouble(datos[2]);
                     int stock = Integer.parseInt(datos [3]);
                     String categoria = datos[4];
-
-
-
                     Producto p = new Producto(codigo,nombre , precio, stock,categoria);
                     productos.add(p);
                 }

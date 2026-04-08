@@ -9,11 +9,7 @@ public class Producto {
     private String categoria;
 
     public Producto (){
-
     }
-
-
-
 
     public Producto(String codigo, String nombre, double precio, int stock, String categoria) {
         this.codigo =codigo;
