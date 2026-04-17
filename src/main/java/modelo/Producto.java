@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 public class Producto {
 
@@ -8,11 +8,11 @@ public class Producto {
     private int stock;
     private String categoria;
 
-    public Producto (){
+    public Producto() {
     }
 
     public Producto(String codigo, String nombre, double precio, int stock, String categoria) {
-        this.codigo =codigo;
+        this.codigo = codigo;
         this.nombre = nombre;
         this.precio = precio;
         this.stock = stock;
@@ -57,11 +57,5 @@ public class Producto {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
-    }
-
-
-    @Override
-    public String toString(){
-        return codigo + "," + nombre + "," + precio + "," + stock + "," + categoria;
     }
 }
